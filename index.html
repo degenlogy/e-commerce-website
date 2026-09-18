@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA STORE — Modern E-commerce</title>
+    <meta name="description" content="Discover modern products at NOVA STORE. Curated products designed for modern everyday living.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Overlays -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <!-- Mobile Menu Toggle -->
+            <button class="icon-btn mobile-menu-btn" aria-label="Open Menu" id="btn-mobile-menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+
+            <!-- Logo -->
+            <div class="logo" id="logo">
+                NOVA <span>STORE</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <a href="#" class="nav-link active" data-view="home">Home</a>
+                <a href="#" class="nav-link" data-view="shop">Shop</a>
+                <a href="#" class="nav-link" data-view="categories">Categories</a>
+                <a href="#" class="nav-link text-accent" data-view="sale">Sale</a>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="header-search" class="search-input" placeholder="Search products..." aria-label="Search products">
+                    <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <div id="search-results" class="search-dropdown"></div>
+                </div>
+                
+                <button class="icon-btn" aria-label="Toggle Theme" id="btn-theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+
+                <button class="icon-btn" aria-label="Wishlist" id="btn-wishlist">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span class="badge" id="wishlist-badge">0</span>
+                </button>
+
+                <button class="icon-btn" aria-label="Cart" id="btn-cart">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm11 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-1.8-4H7.2c-.4 0-.8-.3-.9-.7L4 4H2M6 8h16l-2.4 7.2c-.1.4-.5.8-1 .8H7.6"/></svg>
+                    <span class="badge" id="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Drawers -->
+    <aside id="mobile-menu-drawer" class="drawer drawer-left">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <button class="icon-btn close-drawer" aria-label="Close"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="drawer-content">
+            <div class="mobile-search">
+                <input type="text" id="mobile-search-input" class="search-input" placeholder="Search...">
+            </div>
+            <nav class="mobile-nav">
+                <a href="#" class="nav-link active" data-view="home">Home</a>
+                <a href="#" class="nav-link" data-view="shop">Shop</a>
+                <a href="#" class="nav-link" data-view="categories">Categories</a>
+                <a href="#" class="nav-link text-accent" data-view="sale">Sale</a>
+            </nav>
+        </div>
+    </aside>
+
+    <aside id="cart-drawer" class="drawer drawer-right">
+        <div class="drawer-header">
+            <h3>Shopping Cart (<span id="cart-drawer-count">0</span>)</h3>
+            <button class="icon-btn close-drawer" aria-label="Close"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="drawer-content cart-items" id="cart-items-container">
+            <!-- Cart items render here -->
+        </div>
+        <div class="drawer-footer">
+            <div class="cart-summary-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+            <div class="cart-summary-row text-success"><span>Discount</span><span id="cart-discount">-$0.00</span></div>
+            <div class="cart-summary-row"><span>Tax</span><span id="cart-tax">$0.00</span></div>
+            <div class="cart-summary-row"><span>Shipping</span><span id="cart-shipping">$0.00</span></div>
+            <div class="divider"></div>
+            <div class="cart-summary-row total"><span>Total</span><span id="cart-total">$0.00</span></div>
+            <button class="btn btn-primary w-100" id="btn-checkout" style="margin-top: 1rem;">Checkout</button>
+            <button class="btn btn-outline w-100 close-drawer" style="margin-top: 0.5rem;">Continue Shopping</button>
+        </div>
+    </aside>
+
+    <aside id="wishlist-drawer" class="drawer drawer-right">
+        <div class="drawer-header">
+            <h3>My Wishlist</h3>
+            <button class="icon-btn close-drawer" aria-label="Close"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="drawer-content wishlist-items" id="wishlist-items-container">
+            <!-- Wishlist items render here -->
+        </div>
+    </aside>
+
+    <aside id="filter-drawer" class="drawer drawer-left">
+        <div class="drawer-header">
+            <h3>Filters</h3>
+            <button class="icon-btn close-drawer" aria-label="Close"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="drawer-content" id="mobile-filter-container">
+            <!-- Mobile filters injected via JS -->
+        </div>
+        <div class="drawer-footer flex-gap">
+            <button class="btn btn-outline w-100 btn-clear-filters">Clear All</button>
+            <button class="btn btn-primary w-100 close-drawer">Apply</button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        
+        <!-- View: Home / Shop -->
+        <div id="view-home" class="view active">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <h1>Discover Your Next Favorite</h1>
+                        <p>Curated products designed for modern everyday living. Quality meets aesthetics in our new collection.</p>
+                        <div class="hero-actions flex-gap">
+                            <button class="btn btn-primary" onclick="document.getElementById('shop-section').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+                            <button class="btn btn-outline" onclick="window.scrollTo(0, document.body.scrollHeight)">Explore Collection</button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80" alt="Premium Sneakers" loading="lazy">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories-section container">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories-scroll" id="categories-container">
+                    <!-- Categories render here -->
+                </div>
+            </section>
+
+            <!-- Promo Banner -->
+            <section class="promo-banner container">
+                <div class="promo-content">
+                    <h2>Upgrade Your Everyday</h2>
+                    <p>Save up to 30% on selected premium products.</p>
+                    <button class="btn btn-primary" id="btn-promo-shop">Shop Sale</button>
+                </div>
+            </section>
+
+            <!-- Shop Area (Filters + Grid) -->
+            <section id="shop-section" class="shop-section container">
+                <div class="shop-header">
+                    <h2 class="section-title">Featured Products</h2>
+                    <div class="shop-controls">
+                        <button class="btn btn-outline mobile-only" id="btn-mobile-filters">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg> Filters
+                        </button>
+                        <select class="form-select" id="sort-select" aria-label="Sort products">
+                            <option value="featured">Featured</option>
+                            <option value="newest">Newest</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="rating">Top Rated</option>
+                            <option value="discount">Biggest Discount</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="shop-layout">
+                    <!-- Sidebar Filters -->
+                    <aside class="sidebar-filters desktop-only" id="desktop-filter-container">
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <label class="custom-checkbox"><input type="checkbox" name="price" value="0-50"> <span>Under $50</span></label>
+                            <label class="custom-checkbox"><input type="checkbox" name="price" value="50-100"> <span>$50 - $100</span></label>
+                            <label class="custom-checkbox"><input type="checkbox" name="price" value="100-200"> <span>$100 - $200</span></label>
+                            <label class="custom-checkbox"><input type="checkbox" name="price" value="200-9999"> <span>$200+</span></label>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Rating</h4>
+                            <label class="custom-checkbox"><input type="checkbox" name="rating" value="4"> <span>4★ & above</span></label>
+                            <label class="custom-checkbox"><input type="checkbox" name="rating" value="3"> <span>3★ & above</span></label>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Availability</h4>
+                            <label class="custom-checkbox"><input type="checkbox" name="stock" value="in-stock"> <span>In Stock</span></label>
+                            <label class="custom-checkbox"><input type="checkbox" name="stock" value="out-stock"> <span>Out of Stock</span></label>
+                        </div>
+                        <button class="btn btn-outline w-100 btn-clear-filters" style="margin-top: 1rem;">Clear All</button>
+                    </aside>
+
+                    <!-- Product Grid -->
+                    <div class="product-grid" id="main-product-grid">
+                        <!-- Products render here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- View: Product Details -->
+        <div id="view-product" class="view">
+            <div class="container pb-4 pt-4">
+                <button class="btn-text mb-4" id="btn-back-home">← Back to Shop</button>
+                <div class="product-page-layout">
+                    <!-- Gallery -->
+                    <div class="product-gallery">
+                        <div class="main-image-container">
+                            <img src="" alt="Product" id="pd-main-img">
+                        </div>
+                        <div class="thumbnail-list" id="pd-thumbnails"></div>
+                    </div>
+                    <!-- Details -->
+                    <div class="product-details">
+                        <span class="product-category" id="pd-category">Category</span>
+                        <h1 class="product-title" id="pd-title">Product Name</h1>
+                        <div class="product-rating" id="pd-rating"></div>
+                        <div class="product-price-row">
+                            <span class="price" id="pd-price">$0.00</span>
+                            <span class="old-price" id="pd-old-price"></span>
+                            <span class="discount-badge" id="pd-discount" style="display:none">Save %</span>
+                        </div>
+                        <p class="product-description" id="pd-desc">Description</p>
+                        
+                        <div class="product-options">
+                            <div class="option-group" id="pd-colors-group" style="display:none">
+                                <h4>Color</h4>
+                                <div class="variant-selector" id="pd-colors"></div>
+                            </div>
+                            <div class="option-group" id="pd-sizes-group" style="display:none">
+                                <h4>Size</h4>
+                                <div class="variant-selector" id="pd-sizes"></div>
+                            </div>
+                        </div>
+
+                        <div class="product-actions">
+                            <div class="qty-control">
+                                <button class="qty-btn" id="pd-qty-dec">-</button>
+                                <input type="number" id="pd-qty" value="1" min="1" readonly>
+                                <button class="qty-btn" id="pd-qty-inc">+</button>
+                            </div>
+                            <div class="stock-status" id="pd-stock">In Stock</div>
+                        </div>
+
+                        <div class="flex-gap mt-4">
+                            <button class="btn btn-primary flex-1" id="pd-add-cart">Add to Cart</button>
+                            <button class="btn btn-outline icon-btn" id="pd-wishlist" aria-label="Wishlist">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews -->
+                <section class="product-reviews mt-8">
+                    <h3 class="section-title">Customer Reviews</h3>
+                    <div class="reviews-grid" id="pd-reviews-list">
+                        <!-- Demo Reviews -->
+                        <div class="review-card">
+                            <div class="stars text-accent">★★★★★</div>
+                            <h4>Amazing quality</h4>
+                            <p>Sarah M.</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="stars text-accent">★★★★★</div>
+                            <h4>Exactly what I expected</h4>
+                            <p>David K.</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="stars text-accent">★★★★☆</div>
+                            <h4>Good product and fast delivery</h4>
+                            <p>Alex R.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Related & Recently Viewed -->
+                <section class="mt-8">
+                    <h3 class="section-title">You May Also Like</h3>
+                    <div class="product-grid related-grid" id="related-products"></div>
+                </section>
+                <section class="mt-8">
+                    <h3 class="section-title">Recently Viewed</h3>
+                    <div class="product-grid related-grid" id="viewed-products"></div>
+                </section>
+            </div>
+        </div>
+
+        <!-- View: Checkout -->
+        <div id="view-checkout" class="view">
+            <div class="container checkout-container">
+                <button class="btn-text mb-4" id="btn-back-cart">← Back to Cart</button>
+                <h1 class="mb-4">Checkout</h1>
+                <div class="checkout-layout">
+                    <form id="checkout-form" class="checkout-form">
+                        <div class="form-section">
+                            <h3>Contact Information</h3>
+                            <div class="form-group"><label>Full Name</label><input type="text" class="form-input" required></div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email</label><input type="email" class="form-input" required></div>
+                                <div class="form-group"><label>Phone</label><input type="tel" class="form-input" required></div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <h3>Shipping Address</h3>
+                            <div class="form-group"><label>Address</label><input type="text" class="form-input" required></div>
+                            <div class="form-row">
+                                <div class="form-group"><label>City</label><input type="text" class="form-input" required></div>
+                                <div class="form-group"><label>State</label><input type="text" class="form-input" required></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Postal Code</label><input type="text" class="form-input" required></div>
+                                <div class="form-group"><label>Country</label><input type="text" class="form-input" required></div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <h3>Payment (Demo Only)</h3>
+                            <div class="form-group"><label>Card Number</label><input type="text" class="form-input" placeholder="0000 0000 0000 0000" required></div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Expiry Date</label><input type="text" class="form-input" placeholder="MM/YY" required></div>
+                                <div class="form-group"><label>CVV</label><input type="text" class="form-input" placeholder="123" required></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 btn-large">Place Order</button>
+                    </form>
+                    
+                    <div class="checkout-summary">
+                        <h3>Order Summary</h3>
+                        <div id="checkout-items" class="mb-4"></div>
+                        <div class="cart-summary-row"><span>Subtotal</span><span id="co-subtotal">$0.00</span></div>
+                        <div class="cart-summary-row text-success"><span>Discount</span><span id="co-discount">-$0.00</span></div>
+                        <div class="cart-summary-row"><span>Tax</span><span id="co-tax">$0.00</span></div>
+                        <div class="cart-summary-row"><span>Shipping</span><span id="co-shipping">$0.00</span></div>
+                        <div class="divider"></div>
+                        <div class="cart-summary-row total"><span>Total</span><span id="co-total">$0.00</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo mb-4">NOVA <span>STORE</span></div>
+                <p class="text-muted">Modern products. Made for everyday life.</p>
+            </div>
+            <div class="footer-links">
+                <h4>About</h4>
+                <a href="#">Our Story</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Shop</h4>
+                <a href="#">All Products</a>
+                <a href="#">New Arrivals</a>
+                <a href="#">Best Sellers</a>
+                <a href="#">Sale</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 NOVA STORE. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">X</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="modal">
+        <div class="modal-content">
+            <button class="icon-btn close-modal" aria-label="Close Modal"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            <div class="product-page-layout modal-layout" id="qv-container">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
